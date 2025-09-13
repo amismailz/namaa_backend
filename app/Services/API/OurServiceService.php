@@ -1,0 +1,161 @@
+<?php
+
+namespace App\Services\API;;
+
+use App\Enums\CongestionLevelEnum;
+use App\Enums\MovementTypeEnum;
+use App\Enums\RoleTypeEnum;
+
+use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\SubServiceResource;
+use App\Http\Requests\API\MovementRequest;
+use App\Http\Resources\BannerResource;
+use App\Http\Resources\BlogResource;
+use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\JobResource;
+use App\Http\Resources\MovementResource;
+use App\Http\Resources\OptionsRangeResource;
+use App\Http\Resources\OurServiceResource;
+use App\Http\Resources\OurWorkResource;
+use App\Http\Resources\PointResource;
+use App\Http\Resources\RangeResource;
+use App\Http\Resources\ReviewResource;
+use App\Http\Resources\ReviewStandardResource;
+use App\Http\Resources\ServiceResource;
+use App\Http\Resources\SubServiceResource as ResourcesSubServiceResource;
+use App\Http\Resources\TripResource;
+use App\Models\AboutUs;
+use App\Models\Banner;
+use App\Models\Blog;
+use App\Models\Category;
+use App\Models\City;
+use App\Models\Comment;
+use App\Models\ContactInfo;
+use App\Models\EnsignJobs;
+use App\Models\Movement;
+use App\Models\OurService;
+use App\Models\OurWork;
+use App\Models\Point;
+use App\Models\Range;
+use App\Models\Review;
+use App\Models\ReviewStandard;
+use App\Models\SubService;
+use App\Models\Trip;
+use App\Traits\ResponseTrait;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
+use function Pest\Laravel\call;
+use function Symfony\Component\String\s;
+
+
+class OurServiceService
+{
+    const SORT_DIRECTIONS = ['asc', 'desc'];
+    use ResponseTrait;
+
+    public function getAllServices()
+    {
+        try {
+
+            return $this->okResponse(
+                __('Returned Our Services successfully.'),
+
+                OurServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
+
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+    public function getServiceBySlug($slug)
+    {
+        try {
+
+
+            return $this->okResponse(
+                __('Returned Our Service successfully.'),
+
+                new OurServiceResource(OurService::where('slug',  $slug)->first() ?? []),
+
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+    public function getSubServiceBySlug($slug)
+    {
+        try {
+            return $this->okResponse(
+                __('Returned Sub Service successfully.'),
+
+                new ResourcesSubServiceResource(SubService::where('slug',  $slug)->first() ?? []),
+
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+
+
+    public function getSubServices()
+    {
+        try {
+            return $this->okResponse(
+                __('Returned Sub Services successfully.'),
+
+                ResourcesSubServiceResource::collection(SubService::orderBy('created_at', 'desc')->get() ?? []),
+
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+    public function getAllWorks($request)
+    {
+        try {
+            $perPage = request()->input('per_page', 15);
+            $currentPage = request()->input('page', 1);
+            $ourWorks = OurWork::query();
+            $service = OurService::where('slug', $request->service_slug)->first();
+            if ($request->service_slug) {
+                $ourWorks->where('service_id', $service->id);
+            }
+
+            $ourWorks = $ourWorks->paginate($perPage, ['*'], 'page', $currentPage);
+            $options =  OurService::pluck('title', 'slug')->toArray();
+            return $this->paginateResponseWithFilters(OurWorkResource::collection($ourWorks), $options);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+    public function getAllJobs()
+    {
+        try {
+            return $this->okResponse(
+                __('Returned Jobs successfully.'),
+
+                JobResource::collection(EnsignJobs::orderBy('created_at', 'desc')->get() ?? []),
+
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+}

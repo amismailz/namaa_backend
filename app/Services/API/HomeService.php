@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Services\API;;
+
+use App\Enums\CongestionLevelEnum;
+use App\Enums\MovementTypeEnum;
+use App\Enums\RoleTypeEnum;
+
+use App\Filament\Resources\CategoryResource;
+use App\Http\Requests\API\MovementRequest;
+use App\Http\Resources\BannerResource;
+use App\Http\Resources\BlogResource;
+use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\FeatureResource;
+use App\Http\Resources\MovementResource;
+use App\Http\Resources\OptionsRangeResource;
+use App\Http\Resources\OurWorkResource;
+use App\Http\Resources\PointResource;
+use App\Http\Resources\RangeResource;
+use App\Http\Resources\ReviewResource;
+use App\Http\Resources\ReviewStandardResource;
+use App\Http\Resources\ServiceResource;
+use App\Http\Resources\TripResource;
+use App\Http\Resources\WhyUsResource;
+use App\Models\AboutUs;
+use App\Models\Banner;
+use App\Models\Blog;
+use App\Models\Category;
+use App\Models\City;
+use App\Models\Comment;
+use App\Models\ContactInfo;
+use App\Models\Feature;
+use App\Models\Movement;
+use App\Models\OurService;
+use App\Models\OurWork;
+use App\Models\Point;
+use App\Models\Range;
+use App\Models\Review;
+use App\Models\ReviewStandard;
+use App\Models\Trip;
+use App\Models\WhyUs;
+use App\Traits\ResponseTrait;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
+use function Pest\Laravel\call;
+use function Symfony\Component\String\s;
+
+
+class HomeService
+{
+    const SORT_DIRECTIONS = ['asc', 'desc'];
+    use ResponseTrait;
+
+    public function home()
+    {
+        try {
+
+            return $this->okResponse(
+                __('Returned Home page successfully.'),
+                [
+                    'protfolio' =>  OurWorkResource::collection(OurWork::latest()->limit(5)->get() ?? []),
+                    //   'banners' => BannerResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
+                    //  'whyus' => WhyUsResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
+                    //  'services' =>   ServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
+                    // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
+                    //  'blog' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
+                    //  'clients' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
+                    'contact_info' => ContactInfo::first() ?? [],
+
+                ]
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+    public function contactInfo()
+    {
+        try {
+
+            return $this->okResponse(
+                __('Returned Contact Info page successfully.'),
+
+                ContactInfo::first() ?? [],
+
+
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+
+    public function getAboutUs()
+    {
+        try {
+            return $this->okResponse(
+                __('Returned Range Details successfully.'),
+                AboutUs::first() ?? []
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            //            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+}
