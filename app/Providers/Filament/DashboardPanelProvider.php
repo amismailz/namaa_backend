@@ -31,7 +31,7 @@ class DashboardPanelProvider extends PanelProvider
             ->login()
             ->brandLogo(url('/images/logo.png'))
             ->brandLogoHeight('2.5rem')
-            ->brandName(__('Ensign Agency'))
+            ->brandName(__('Namaa'))
             ->favicon(url('/style/assets/img/logo/logo1.png'))
             ->colors([
                 'primary' => Color::Blue,
