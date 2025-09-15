@@ -6,6 +6,7 @@ use App\Http\Controllers\API\V1\BlogController;
 use App\Http\Controllers\API\V1\BookingController;
 use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\CountactUsController;
+use App\Http\Controllers\API\V1\FaqController;
 use App\Http\Controllers\API\V1\MovementController;
 use App\Http\Controllers\API\V1\PointController;
 use App\Http\Controllers\API\V1\RangeController;
@@ -34,7 +35,7 @@ Route::group([
     Route::group([], function () {
         Route::get('/form/client-request', [CountactUsController::class, 'getFormClientRequest']);
         Route::post('/submit/client-request', [CountactUsController::class, 'submitClientRequest']);
-
+        Route::get('/faqs', [FaqController::class, 'getAllFaqs']);
         
         Route::get('/home', [HomeController::class, 'home']);
         Route::get('/contact-info', [HomeController::class, 'contactInfo']);
