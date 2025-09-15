@@ -19,6 +19,7 @@
     "Sub Services": "خدمات فرعية",
     "WebsiteDesign": "تصميم الموقع",
     "Is popular?": "هل هي شائعة؟",
+    "Published Date": "تاريخ النشر",
     "Is Published?": "هل تم النشر؟",
     "Faqs": "الاسئلة الشائعة",
     "FAQS": "الاسئلة الشائعة",
@@ -27,6 +28,8 @@
     "Answer": "الاجابة",
     "English": "انجليزى",
     "Arabic": "عربى",
+    "FAQs": "الاسئلة الشائعة",
+    "+ Add FAQ": "+ اضافة سؤال",
     "GraphicDesign": "تصميم جرافيك",
     "LogoDesign": "تصميم اللوجو",
     "EmailMarketing": "تسويق البريد الالكتروني",
@@ -803,6 +806,5 @@
     "Transaction Type": "نوع المعاملة",
     "Transactions": "المعاملات",
     "Account Transactions": "معاملات الحسابات",
-    "Transaction": "المعاملة",
-    "Published Date": "تاريخ النشر"
+    "Transaction": "المعاملة"
 }

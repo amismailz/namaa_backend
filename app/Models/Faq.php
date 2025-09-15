@@ -14,6 +14,7 @@ class Faq extends Model
         'question',
         'answer',
         'is_published',
+        'blog_id',
     ];
     public $translatable = ['question', 'answer'];
 }

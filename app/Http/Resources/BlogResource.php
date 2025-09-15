@@ -26,6 +26,7 @@ class BlogResource extends JsonResource
             'image' => $this->image ? url(path: 'storage/' . $this->image) : null,
             'is_popular' => $this->is_popular,
             'published_date' => $this->published_date,
+            'faqs' => FaqResource::collection($this->faqs),
             //   'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

@@ -28,6 +28,10 @@ class Blog extends Model
         'is_popular',
         'published_date'
     ];
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class);
+    }
     protected static function booted(): void
     {
         static::creating(function (Blog $item) {

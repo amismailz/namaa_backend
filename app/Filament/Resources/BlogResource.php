@@ -11,6 +11,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
@@ -123,8 +124,34 @@ class BlogResource extends Resource
                             ->columns(1),
                     ])
                     ->collapsed(false),
-                Toggle::make('is_published')->label(__('Is published?'))->default(true),
-                Toggle::make('is_popular')->label(__('Is popular?'))->default(false),
+                Repeater::make('faqs')
+                    ->relationship('faqs')
+                    ->label(__('FAQs'))
+                    ->schema([
+                        Forms\Components\TextInput::make('question.en')
+                            ->label(__('Question') . ' (' . __('english') . ')')
+                            ->required(),
+                        Forms\Components\TextInput::make('question.ar')
+                            ->label(__('Question') . ' (' . __('arabic') . ')')
+                            ->required(),
+
+                        Forms\Components\TextInput::make('answer.en')
+                            ->label(__('Answer') . ' (' . __('english') . ')')
+                            ->required(),
+                        Forms\Components\TextInput::make('answer.ar')
+                            ->label(__('Answer') . ' (' . __('arabic') . ')')
+                            ->required(),
+                    ])
+                    ->collapsible()
+                    ->createItemButtonLabel(__('+ Add FAQ'))
+                    ->columns(2), // two columns in one row
+                Grid::make(2)
+                    ->schema([
+
+                        Toggle::make('is_published')->label(__('Is published?'))->default(true),
+                        Toggle::make('is_popular')->label(__('Is popular?'))->default(false),
+                    ])
+
 
 
 
