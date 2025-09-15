@@ -7,8 +7,10 @@ use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
@@ -56,15 +58,23 @@ class BlogResource extends Resource
                     ->label(__('Title (English)'))
                     ->required()
                     ->maxLength(255),
-                TextInput::make('short_description.ar')
-                    ->label(__('Short description (Arabic)'))
-                    ->required()
-                    ->maxLength(255),
+                Grid::make(2)
+                    ->schema([
+                        DateTimePicker::make('published_date')
+                            ->label(__('Published Date'))
+                            ->native(false)
+                            ->required(),
+                    ])
+                    ->columns(2),
+                // TextInput::make('short_description.ar')
+                //     ->label(__('Short description (Arabic)'))
+                //     ->required()
+                //     ->maxLength(255),
 
-                TextInput::make('short_description.en')
-                    ->label(__('Short description (English)'))
-                    ->required()
-                    ->maxLength(255),
+                // TextInput::make('short_description.en')
+                //     ->label(__('Short description (English)'))
+                //     ->required()
+                //     ->maxLength(255),
 
 
                 TinyEditor::make('description.ar')
@@ -130,7 +140,7 @@ class BlogResource extends Resource
                     ->label(__('ID')),
 
                 TextColumn::make('title')->label(__('Title'))->searchable()->sortable(),
-                TextColumn::make('short_description')->label(__('Short description'))->limit(50),
+                //  TextColumn::make('short_description')->label(__('Short description'))->limit(50),
                 ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
 
                 ToggleColumn::make('is_published')
@@ -150,7 +160,11 @@ class BlogResource extends Resource
                     ->offIcon('heroicon-m-x-mark')
                     ->getStateUsing(fn($record) => $record->is_popular)
                     ->afterStateUpdated(fn($record, $state) => $record->update(['is_popular' => $state])),
-
+                TextColumn::make('published_date')
+                    ->label(__('Published Date'))
+                    ->dateTime('d M, Y H:i:s')
+                    ->sortable()
+                    ->tooltip(fn($record) => $record->created_at?->format('Y-m-d H:i:s') ?? __('No Date')),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
                     ->dateTime('d M, Y H:i:s')

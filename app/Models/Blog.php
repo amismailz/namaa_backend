@@ -14,6 +14,7 @@ class Blog extends Model
     public $translatable = ['title', 'short_description', 'meta_title', 'meta_description', 'description'];
     protected $casts = [
         'images' => 'array',
+        'published_date' => 'datetime',
     ];
     protected $fillable = [
         'title',
@@ -24,7 +25,8 @@ class Blog extends Model
         'is_published',
         'image',
         'slug',
-        'is_popular'
+        'is_popular',
+        'published_date'
     ];
     protected static function booted(): void
     {
