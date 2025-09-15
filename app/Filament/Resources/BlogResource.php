@@ -59,8 +59,29 @@ class BlogResource extends Resource
                     ->label(__('Title (English)'))
                     ->required()
                     ->maxLength(255),
+
+
+                TextInput::make('slug.en')
+                    ->required()
+                    ->label(__('Slug (English)'))->unique(
+                        table: 'blogs',
+                        column: 'slug->en',
+                        ignoreRecord: true
+                    ),
+                TextInput::make('slug.ar')
+                    ->required()
+                    ->label(__('Slug (Arabic)'))->unique(
+                        table: 'blogs',
+                        column: 'slug->en',
+                        ignoreRecord: true
+                    ),
+
+
+
+
                 Grid::make(2)
                     ->schema([
+
                         DateTimePicker::make('published_date')
                             ->label(__('Published Date'))
                             ->native(false)
@@ -76,7 +97,6 @@ class BlogResource extends Resource
                 //     ->label(__('Short description (English)'))
                 //     ->required()
                 //     ->maxLength(255),
-
 
                 TinyEditor::make('description.ar')
                     ->label(__('Description (Arabic)'))
@@ -167,6 +187,8 @@ class BlogResource extends Resource
                     ->label(__('ID')),
 
                 TextColumn::make('title')->label(__('Title'))->searchable()->sortable(),
+
+                TextColumn::make('slug')->label(__('Slug'))->searchable()->sortable(),
                 //  TextColumn::make('short_description')->label(__('Short description'))->limit(50),
                 ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
 

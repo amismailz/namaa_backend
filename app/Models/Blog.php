@@ -11,7 +11,7 @@ use Str;
 class Blog extends Model
 {
     use HasFactory, HasTranslations,  SoftDeletes;
-    public $translatable = ['title', 'short_description', 'meta_title', 'meta_description', 'description'];
+    public $translatable = ['title', 'short_description', 'meta_title', 'meta_description', 'description', 'slug'];
     protected $casts = [
         'images' => 'array',
         'published_date' => 'datetime',
@@ -32,34 +32,55 @@ class Blog extends Model
     {
         return $this->hasMany(Faq::class);
     }
+
+
     protected static function booted(): void
     {
         static::creating(function (Blog $item) {
-            $slug = Str::slug($item->title);
-            $originalSlug = $slug;
-            $counter = 1;
-            // Check if the slug already exists in the database
-            while (Blog::where('slug', $slug)->exists()) {
-                $slug = $originalSlug . '-' . $counter;
-                $counter++;
+
+            foreach (['ar', 'en'] as $lang) {
+                // إذا المستخدم لم يدخل slug
+                $slug = $item->getTranslation('slug', $lang);
+                if (!$slug) {
+                    $title = $item->getTranslation('title', $lang) ?? '';
+                    if ($title) {
+                        $slug = Str::slug($title);
+
+                        $originalSlug = $slug;
+                        $counter = 1;
+
+                        while (Blog::where("slug->$lang", $slug)->exists()) {
+                            $slug = $originalSlug . '-' . $counter;
+                            $counter++;
+                        }
+
+                        $item->setTranslation('slug', $lang, $slug);
+                    }
+                }
             }
-            // Assign the unique slug
-            $item->slug = $slug;
         });
 
         static::updating(function (Blog $item) {
 
-            if ($item->isDirty('title')) { // Check if title is being updated
-                $slug = Str::slug($item->title);
-                $originalSlug = $slug;
-                $counter = 1;
-                // Check if the slug already exists, but ignore the current record
-                while (Blog::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
-                    $slug = $originalSlug . '-' . $counter;
-                    $counter++;
+            foreach (['ar', 'en'] as $lang) {
+                // إذا المستخدم لم يدخل slug
+                $slug = $item->getTranslation('slug', $lang);
+                if (!$slug) {
+                    $title = $item->getTranslation('title', $lang) ?? '';
+                    if ($title) {
+                        $slug = Str::slug($title);
+
+                        $originalSlug = $slug;
+                        $counter = 1;
+
+                        while (Blog::where("slug->$lang", $slug)->where('id', '!=', $item->id)->exists()) {
+                            $slug = $originalSlug . '-' . $counter;
+                            $counter++;
+                        }
+
+                        $item->setTranslation('slug', $lang, $slug);
+                    }
                 }
-                // Assign the unique slug
-                $item->slug = $slug;
             }
         });
     }

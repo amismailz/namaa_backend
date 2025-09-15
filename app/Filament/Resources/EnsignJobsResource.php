@@ -8,6 +8,7 @@ use App\Models\EnsignJobs;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -54,6 +55,20 @@ class EnsignJobsResource extends Resource
                 Forms\Components\TextInput::make('title.ar')
                     ->label(__('Title') . ' (' . __('arabic') . ')')
                     ->required(),
+                TextInput::make('slug.en')
+                    ->required()
+                    ->label(__('Slug (English)'))->unique(
+                        table: 'ensign_jobs',
+                        column: 'slug->en',
+                        ignoreRecord: true
+                    ),
+                TextInput::make('slug.ar')
+                    ->required()
+                    ->label(__('Slug (Arabic)'))->unique(
+                        table: 'ensign_jobs',
+                        column: 'slug->en',
+                        ignoreRecord: true
+                    ),
                 RichEditor::make('description.en')
                     ->label(__('Description') . ' (' . __('English') . ')')
                     ->required(),
@@ -83,6 +98,7 @@ class EnsignJobsResource extends Resource
                     ->sortable()
                     ->label(__('ID')),
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('slug')->label(__('Slug'))->searchable()->sortable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
                 ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
 

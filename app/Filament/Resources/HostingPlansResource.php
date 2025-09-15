@@ -8,6 +8,7 @@ use App\Models\HostingPlans;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -52,6 +53,22 @@ class HostingPlansResource extends Resource
             Forms\Components\TextInput::make('name.ar')
                 ->label(__('Name') . ' (' . __('arabic') . ')')
                 ->required(),
+
+            TextInput::make('slug.en')
+                ->required()
+                ->label(__('Slug (English)'))->unique(
+                    table: 'hosting_plans',
+                    column: 'slug->en',
+                    ignoreRecord: true
+                ),
+            TextInput::make('slug.ar')
+                ->required()
+                ->label(__('Slug (Arabic)'))->unique(
+                    table: 'hosting_plans',
+                    column: 'slug->en',
+                    ignoreRecord: true
+                ),
+
             // Forms\Components\Select::make('service_id')
             //     ->label('الخدمة المرتبطة')
             //     ->relationship('service', 'title')
@@ -107,6 +124,7 @@ class HostingPlansResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID')->sortable(),
                 Tables\Columns\TextColumn::make('name')->label('اسم الخطة')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('slug')->label(__('Slug'))->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('price')->label('السعر')->sortable(),
                 Tables\Columns\TextColumn::make('currency')->label('العملة'),
                 Tables\Columns\TextColumn::make('billing_cycle')->label('مدة الاشتراك'),

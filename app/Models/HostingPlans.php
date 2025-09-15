@@ -11,7 +11,7 @@ use Str;
 class HostingPlans extends Model
 {
     use HasFactory, HasTranslations,  SoftDeletes;
-    public $translatable = ['name', 'description','terms_conditions'];
+    public $translatable = ['name', 'description', 'terms_conditions', 'slug'];
     protected $fillable = [
         'name',
         'slug',
@@ -26,6 +26,7 @@ class HostingPlans extends Model
         'free_domain',
         'is_most_popular',
         'service_id',
+        'slug'
     ];
 
     protected $casts = [
@@ -35,34 +36,53 @@ class HostingPlans extends Model
     {
         return $this->belongsTo(OurService::class);
     }
-    protected static function booted(): void
+  protected static function booted(): void
     {
         static::creating(function (HostingPlans $item) {
-            $slug = Str::slug($item->name);
-            $originalSlug = $slug;
-            $counter = 1;
-            // Check if the slug already exists in the database
-            while (HostingPlans::where('slug', $slug)->exists()) {
-                $slug = $originalSlug . '-' . $counter;
-                $counter++;
+
+            foreach (['ar', 'en'] as $lang) {
+                // إذا المستخدم لم يدخل slug
+                $slug = $item->getTranslation('slug', $lang);
+                if (!$slug) {
+                    $title = $item->getTranslation('title', $lang) ?? '';
+                    if ($title) {
+                        $slug = Str::slug($title);
+
+                        $originalSlug = $slug;
+                        $counter = 1;
+
+                        while (HostingPlans::where("slug->$lang", $slug)->exists()) {
+                            $slug = $originalSlug . '-' . $counter;
+                            $counter++;
+                        }
+
+                        $item->setTranslation('slug', $lang, $slug);
+                    }
+                }
             }
-            // Assign the unique slug
-            $item->slug = $slug;
         });
 
         static::updating(function (HostingPlans $item) {
 
-            if ($item->isDirty('name')) { // Check if name is being updated
-                $slug = Str::slug($item->name);
-                $originalSlug = $slug;
-                $counter = 1;
-                // Check if the slug already exists, but ignore the current record
-                while (HostingPlans::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
-                    $slug = $originalSlug . '-' . $counter;
-                    $counter++;
+            foreach (['ar', 'en'] as $lang) {
+                // إذا المستخدم لم يدخل slug
+                $slug = $item->getTranslation('slug', $lang);
+                if (!$slug) {
+                    $title = $item->getTranslation('title', $lang) ?? '';
+                    if ($title) {
+                        $slug = Str::slug($title);
+
+                        $originalSlug = $slug;
+                        $counter = 1;
+
+                        while (HostingPlans::where("slug->$lang", $slug)->where('id', '!=', $item->id)->exists()) {
+                            $slug = $originalSlug . '-' . $counter;
+                            $counter++;
+                        }
+
+                        $item->setTranslation('slug', $lang, $slug);
+                    }
                 }
-                // Assign the unique slug
-                $item->slug = $slug;
             }
         });
     }
