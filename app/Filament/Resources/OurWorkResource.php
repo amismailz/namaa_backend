@@ -10,7 +10,6 @@ use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -58,20 +57,6 @@ class OurWorkResource extends Resource
                 Forms\Components\TextInput::make('title.ar')
                     ->label(__('Title') . ' (' . __('arabic') . ')')
                     ->required(),
-                TextInput::make('slug.en')
-                    ->required()
-                    ->label(__('Slug (English)'))->unique(
-                        table: 'our_works',
-                        column: 'slug->en',
-                        ignoreRecord: true
-                    ),
-                TextInput::make('slug.ar')
-                    ->required()
-                    ->label(__('Slug (Arabic)'))->unique(
-                        table: 'our_works',
-                        column: 'slug->en',
-                        ignoreRecord: true
-                    ),
                 Select::make('service_id')
                     ->label(__('Service'))
                     ->relationship('service', 'title')
@@ -116,7 +101,6 @@ class OurWorkResource extends Resource
                     ->sortable()
                     ->label(__('ID')),
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('slug')->label(__('Slug'))->searchable()->sortable(),
                 TextColumn::make('service.title')->label(__('Service'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
                 ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
