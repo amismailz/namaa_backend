@@ -106,6 +106,8 @@ class ContactInfo extends Page implements HasForms
                             ->label(__('Tiktok Link')),
                         Forms\Components\TextInput::make('twitter_link')
                             ->label(__('Twitter Link')),
+                        Forms\Components\TextInput::make('snapchat_link')
+                            ->label(__('Snapchat Link')),
                         Forms\Components\TextInput::make('postal_code')->required()
                             ->label(__('Postal Code')),
                         Forms\Components\TextInput::make('tax_id')->required()
@@ -141,6 +143,7 @@ class ContactInfo extends Page implements HasForms
                 'tiktok_link'    => ['nullable'],
                 'youtube_link'   => ['nullable'],
                 'twitter_link'   => ['nullable'],
+                'snapchat_link'   => ['nullable'],
                 'whatsapp_number' => ['required'],
                 'postal_code' => ['required'],
                 'tax_id' => ['required'],

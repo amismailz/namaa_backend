@@ -30,6 +30,7 @@ class ContactInfo extends Model
         'postal_code',
         'tax_id',
         'map_link',
+        'snapchat_link',
         'whatsapp_number',
     ];
 }
