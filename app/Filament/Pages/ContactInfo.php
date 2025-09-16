@@ -94,17 +94,17 @@ class ContactInfo extends Page implements HasForms
                     ->schema([
                         Forms\Components\TextInput::make('whatsapp_number')->required()
                             ->label(__('Whatsapp Number')),
-                        Forms\Components\TextInput::make('facebook_link')->required()
+                        Forms\Components\TextInput::make('facebook_link')
                             ->label(__('Facebook Link')),
-                        Forms\Components\TextInput::make('instagram_link')->required()
+                        Forms\Components\TextInput::make('instagram_link')
                             ->label(__('Instagram Link')),
-                        Forms\Components\TextInput::make('youtube_link')->required()
+                        Forms\Components\TextInput::make('youtube_link')
                             ->label(__('YouTube Link')),
-                        Forms\Components\TextInput::make('linkedIn_link')->required()
+                        Forms\Components\TextInput::make('linkedIn_link')
                             ->label(__('Linkedin Link')),
-                        Forms\Components\TextInput::make('tiktok_link')->required()
+                        Forms\Components\TextInput::make('tiktok_link')
                             ->label(__('Tiktok Link')),
-                        Forms\Components\TextInput::make('twitter_link')->required()
+                        Forms\Components\TextInput::make('twitter_link')
                             ->label(__('Twitter Link')),
                         Forms\Components\TextInput::make('postal_code')->required()
                             ->label(__('Postal Code')),
@@ -135,12 +135,12 @@ class ContactInfo extends Page implements HasForms
                 'address.en'     => ['required'],
                 'address.ar'     => ['required'],
                 'map_link'    => ['required'],
-                'facebook_link' => ['required'],
-                'instagram_link' => ['required'],
-                'linkedIn_link' => ['required'],
-                'tiktok_link' => ['required'],
-                'youtube_link' => ['required'],
-                'twitter_link' => ['required'],
+                'facebook_link'  => ['nullable'],
+                'instagram_link' => ['nullable'],
+                'linkedIn_link'  => ['nullable'],
+                'tiktok_link'    => ['nullable'],
+                'youtube_link'   => ['nullable'],
+                'twitter_link'   => ['nullable'],
                 'whatsapp_number' => ['required'],
                 'postal_code' => ['required'],
                 'tax_id' => ['required'],
