@@ -100,7 +100,7 @@ class ContactInfo extends Page implements HasForms
                             ->label(__('Instagram Link')),
                         Forms\Components\TextInput::make('youtube_link')->required()
                             ->label(__('YouTube Link')),
-                        Forms\Components\TextInput::make('linkedin_link')->required()
+                        Forms\Components\TextInput::make('linkedIn_link')->required()
                             ->label(__('Linkedin Link')),
                         Forms\Components\TextInput::make('tiktok_link')->required()
                             ->label(__('Tiktok Link')),
@@ -137,7 +137,7 @@ class ContactInfo extends Page implements HasForms
                 'map_link'    => ['required'],
                 'facebook_link' => ['required'],
                 'instagram_link' => ['required'],
-                'linkedin_link' => ['required'],
+                'linkedIn_link' => ['required'],
                 'tiktok_link' => ['required'],
                 'youtube_link' => ['required'],
                 'twitter_link' => ['required'],
