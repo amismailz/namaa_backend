@@ -12,13 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contact_infos', function (Blueprint $table) {
-            $table->string('snapchat_link')->nullable()->after('facebook_link');
-            
+                   $table->string('snapchat_link')->nullable()->after('twitter_link'); 
+
         });
     }
 
     /**
-     * 
      * Reverse the migrations.
      */
     public function down(): void

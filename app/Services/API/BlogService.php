@@ -65,7 +65,6 @@ class BlogService
 
             $blogs = $blogs->orderBy('blogs.created_at', 'desc')->paginate($perPage, ['*'], 'page', $currentPage);
             return $this->paginateResponse(BlogResource::collection($blogs));
-
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             dd($exception);
@@ -76,7 +75,9 @@ class BlogService
     {
         try {
 
-            $blog = Blog::where('slug', $slug)->first();
+            $blog = Blog::where('slug->en', $slug)
+                ->orWhere('slug->ar', $slug)
+                ->first();
             return $this->okResponse(
                 __('Returned Home page successfully.'),
                 [
@@ -84,7 +85,7 @@ class BlogService
                     'popular_blogs' => BlogResource::collection(Blog::where('is_popular', 1)->limit(6)->get()),
 
                 ]
-                
+
 
             );
         } catch (\Exception $exception) {
