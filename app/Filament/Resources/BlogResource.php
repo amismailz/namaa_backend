@@ -61,13 +61,6 @@ class BlogResource extends Resource
                     ->maxLength(255),
 
 
-                TextInput::make('slug.en')
-                    ->required()
-                    ->label(__('Slug (English)'))->unique(
-                        table: 'blogs',
-                        column: 'slug->en',
-                        ignoreRecord: true
-                    ),
                 TextInput::make('slug.ar')
                     ->required()
                     ->label(__('Slug (Arabic)'))->unique(
@@ -75,7 +68,13 @@ class BlogResource extends Resource
                         column: 'slug->en',
                         ignoreRecord: true
                     ),
-
+                TextInput::make('slug.en')
+                    ->required()
+                    ->label(__('Slug (English)'))->unique(
+                        table: 'blogs',
+                        column: 'slug->en',
+                        ignoreRecord: true
+                    ),
 
 
 

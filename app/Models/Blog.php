@@ -32,55 +32,48 @@ class Blog extends Model
     {
         return $this->hasMany(Faq::class);
     }
-
-
     protected static function booted(): void
     {
         static::creating(function (Blog $item) {
-
             foreach (['ar', 'en'] as $lang) {
-                // إذا المستخدم لم يدخل slug
                 $slug = $item->getTranslation('slug', $lang);
-                if (!$slug) {
-                    $title = $item->getTranslation('title', $lang) ?? '';
-                    if ($title) {
-                        $slug = Str::slug($title);
 
-                        $originalSlug = $slug;
-                        $counter = 1;
 
-                        while (Blog::where("slug->$lang", $slug)->exists()) {
-                            $slug = $originalSlug . '-' . $counter;
-                            $counter++;
-                        }
+                $slug = str_replace(' ', '-', $slug);
 
-                        $item->setTranslation('slug', $lang, $slug);
-                    }
+
+                $originalSlug = $slug;
+                $counter = 1;
+
+                while (Blog::where("slug->$lang", $slug)->exists()) {
+                    $slug = $originalSlug . '-' . $counter;
+                    $counter++;
                 }
+
+                $item->setTranslation('slug', $lang, $slug);
             }
         });
 
         static::updating(function (Blog $item) {
-
             foreach (['ar', 'en'] as $lang) {
-                // إذا المستخدم لم يدخل slug
+                // فقط إذا تم تعديل الـ slug يدويًا
+                // if ($item->isDirty("slug->$lang")) {
                 $slug = $item->getTranslation('slug', $lang);
-                if (!$slug) {
-                    $title = $item->getTranslation('title', $lang) ?? '';
-                    if ($title) {
-                        $slug = Str::slug($title);
+                $slug = str_replace(' ', '-', $slug);
 
-                        $originalSlug = $slug;
-                        $counter = 1;
+                $originalSlug = $slug;
+                $counter = 1;
 
-                        while (Blog::where("slug->$lang", $slug)->where('id', '!=', $item->id)->exists()) {
-                            $slug = $originalSlug . '-' . $counter;
-                            $counter++;
-                        }
-
-                        $item->setTranslation('slug', $lang, $slug);
-                    }
+                while (Blog::where("slug->$lang", $slug)
+                    ->where('id', '!=', $item->id)
+                    ->exists()
+                ) {
+                    $slug = $originalSlug . '-' . $counter;
+                    $counter++;
                 }
+
+                $item->setTranslation('slug', $lang, $slug);
+                // }
             }
         });
     }
