@@ -68,7 +68,7 @@ class HomeService
                     //  'whyus' => WhyUsResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
                     //  'services' =>   ServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
-                    //  'blog' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
+                    'blog' =>  BlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
                     //  'clients' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
                     'contact_info' => ContactInfo::first() ?? [],
 
