@@ -12,7 +12,7 @@ use Spatie\Translatable\HasTranslations;
 class OurService extends Model
 {
     use HasFactory, HasTranslations,  SoftDeletes;
-    public $translatable = ['title', 'description'];
+    public $translatable = ['title', 'description', 'slug'];
     protected $fillable = [
         'slug',
         'title',
