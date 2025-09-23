@@ -20,6 +20,7 @@ class OurServiceResource extends JsonResource
             'slug' => $this->slug,
             'title' => $this->title,
             'description' => $this->description,
+            'icon'=> $this->icon ? url('storage/' . $this->icon) : null,
             'image' => $this->image ? url('storage/' . $this->image) : null,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
