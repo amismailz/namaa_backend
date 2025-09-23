@@ -25,6 +25,7 @@ class OurWorkResource extends Resource
 {
     protected static ?string $model = OurWork::class;
 
+    
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationGroup(): ?string
