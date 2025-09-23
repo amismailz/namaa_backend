@@ -132,7 +132,7 @@ class OurServiceService
             $sub_services = $service->subServices;
             return $this->okResponse(
                 __('Returned Sub Service successfully.'),
-                new ResourcesSubServiceResource($sub_services)
+                ResourcesSubServiceResource::collection($sub_services)
 
             );
         } catch (\Exception $exception) {
