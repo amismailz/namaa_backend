@@ -15,6 +15,7 @@ class WebsiteAgency extends Model
     protected $fillable = [
         'title',
         'description',
+        'image',
     ];
     protected $table = 'website_agency';
     protected static function booted(): void

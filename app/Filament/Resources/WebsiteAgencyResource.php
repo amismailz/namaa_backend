@@ -7,9 +7,11 @@ use App\Filament\Resources\WebsiteAgencyResource\Pages;
 use App\Filament\Resources\WebsiteAgencyResource\RelationManagers;
 use App\Models\WebsiteAgency;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -67,6 +69,14 @@ class WebsiteAgencyResource extends Resource
                     ->direction('auto|rtl|ltr')
                     ->columnSpan('full')
                     ->required(),
+                FileUpload::make('image')
+                    ->label(__('Image'))
+                    ->image()
+                    ->directory('website-agency')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->required()
+                    ->imagePreviewHeight('100'),
 
 
             ]);
@@ -80,6 +90,7 @@ class WebsiteAgencyResource extends Resource
                     ->sortable()
                     ->label(__('ID')),
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
+                ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
 
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
