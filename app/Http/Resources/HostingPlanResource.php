@@ -19,7 +19,7 @@ class HostingPlanResource extends JsonResource
             'id'             => $this->id,
             'name'           => $this->name,
             'slug'           => $this->slug,
-            // 'description'    => $this->description,
+            'description'    => $this->description,
             'price'          => $this->price,
             'currency'       => $this->currency,
             'billing_cycle'  => $this->billing_cycle,

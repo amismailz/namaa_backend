@@ -24,7 +24,7 @@ use Filament\Forms\Components\RichEditor;
 class OurServiceResource extends Resource
 {
     protected static ?string $model = OurService::class;
-    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationGroup(): ?string
@@ -57,6 +57,22 @@ class OurServiceResource extends Resource
                 Forms\Components\TextInput::make('title.ar')
                     ->label(__('Title') . ' (' . __('arabic') . ')')
                     ->required(),
+
+
+                TextInput::make('slug.en')
+                    ->required()
+                    ->label(__('Slug (English)'))->unique(
+                        table: 'blogs',
+                        column: 'slug->en',
+                        ignoreRecord: true
+                    ),
+                TextInput::make('slug.ar')
+                    ->required()
+                    ->label(__('Slug (Arabic)'))->unique(
+                        table: 'blogs',
+                        column: 'slug->en',
+                        ignoreRecord: true
+                    ),
                 // TinyEditor::make('description.ar')
                 //     ->label(__('Description (Arabic)'))
                 //     ->fileAttachmentsDisk('public')
@@ -97,6 +113,7 @@ class OurServiceResource extends Resource
                     ->sortable()
                     ->label(__('ID')),
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
+                TextColumn::make('slug')->label(__('Slug'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
                 // ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
 
@@ -110,12 +127,12 @@ class OurServiceResource extends Resource
                 //
             ])
             ->actions([
-              //  Tables\Actions\EditAction::make(),
-             //   Tables\Actions\DeleteAction::make(),
+                //  Tables\Actions\EditAction::make(),
+                //   Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                //    Tables\Actions\DeleteBulkAction::make(),
+                    //    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -132,7 +149,7 @@ class OurServiceResource extends Resource
         return [
             'index' => Pages\ListOurServices::route('/'),
             'create' => Pages\CreateOurService::route('/create'),
-         //   'edit' => Pages\EditOurService::route('/{record}/edit'),
+            //   'edit' => Pages\EditOurService::route('/{record}/edit'),
         ];
     }
 }

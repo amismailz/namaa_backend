@@ -26,31 +26,45 @@ class OurService extends Model
     protected static function booted(): void
     {
         static::creating(function (OurService $item) {
-            $slug = Str::slug($item->title);
-            $originalSlug = $slug;
-            $counter = 1;
-            // Check if the slug already exists in the database
-            while (OurService::where('slug', $slug)->exists()) {
-                $slug = $originalSlug . '-' . $counter;
-                $counter++;
-            }
-            // Assign the unique slug
-            $item->slug = $slug;
-        });
+            foreach (['ar', 'en'] as $lang) {
+                $slug = $item->getTranslation('slug', $lang);
 
-        static::updating(function (OurService $item) {
-          
-            if ($item->isDirty('title')) { // Check if name is being updated
-                $slug = Str::slug($item->title);
+
+                $slug = str_replace(' ', '-', $slug);
+
+
                 $originalSlug = $slug;
                 $counter = 1;
-                // Check if the slug already exists, but ignore the current record
-                while (OurService::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
+
+                while (OurService::where("slug->$lang", $slug)->exists()) {
                     $slug = $originalSlug . '-' . $counter;
                     $counter++;
                 }
-                // Assign the unique slug
-                $item->slug = $slug;
+
+                $item->setTranslation('slug', $lang, $slug);
+            }
+        });
+
+        static::updating(function (OurService $item) {
+            foreach (['ar', 'en'] as $lang) {
+                // فقط إذا تم تعديل الـ slug يدويًا
+                // if ($item->isDirty("slug->$lang")) {
+                $slug = $item->getTranslation('slug', $lang);
+                $slug = str_replace(' ', '-', $slug);
+
+                $originalSlug = $slug;
+                $counter = 1;
+
+                while (OurService::where("slug->$lang", $slug)
+                    ->where('id', '!=', $item->id)
+                    ->exists()
+                ) {
+                    $slug = $originalSlug . '-' . $counter;
+                    $counter++;
+                }
+
+                $item->setTranslation('slug', $lang, $slug);
+                // }
             }
         });
     }

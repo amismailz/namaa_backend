@@ -20,7 +20,8 @@ class AboutUs extends Model
         'image'
     ];
     protected $casts = [
-        'image' => 'string',
+        'images' => 'array',
+
     ];
     protected static function booted(): void
     {

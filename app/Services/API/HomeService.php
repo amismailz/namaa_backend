@@ -64,12 +64,12 @@ class HomeService
                 __('Returned Home page successfully.'),
                 [
                     'protfolio' =>  OurWorkResource::collection(OurWork::latest()->limit(5)->get() ?? []),
-                    //   'banners' => BannerResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
-                    //  'whyus' => WhyUsResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
-                    //  'services' =>   ServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
+                    'banners' => BannerResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
+                    //'whyus' => WhyUsResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
+                    'services' =>   ServiceResource::collection(OurService::orderBy('created_at', 'desc')->limit(6)->get() ?? []),
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
                     'blog' =>  BlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
-                    //  'clients' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
+                    'clients' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
                     'contact_info' => ContactInfo::first() ?? [],
 
                 ]
@@ -103,7 +103,7 @@ class HomeService
         try {
             return $this->okResponse(
                 __('Returned Range Details successfully.'),
-                AboutUs::first() ?? []
+                AboutUs::collection(AboutUs::get())
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());

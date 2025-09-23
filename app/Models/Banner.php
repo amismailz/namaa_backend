@@ -20,4 +20,8 @@ class Banner extends Model
         'description',
         'image'
     ];
+    protected $casts = [
+        'images' => 'array',
+
+    ];
 }

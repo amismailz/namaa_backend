@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\HostingPlansResource\Pages;
 use App\Filament\Resources\HostingPlansResource\RelationManagers;
 use App\Models\HostingPlans;
@@ -70,14 +71,25 @@ class HostingPlansResource extends Resource
             //     ->default('year'),
             Forms\Components\TextInput::make('billing_cycle')->label('مدة الاشتراك')->required(),
 
+            TinyEditor::make('description.en')
+                ->label(__('Description (English)'))
+                ->fileAttachmentsDisk('public')
+                ->fileAttachmentsVisibility('public')
+                ->fileAttachmentsDirectory('uploads')
+                ->profile('default|simple|full|minimal|none|custom')
+                ->direction('auto|rtl|ltr')
+                ->columnSpan('full')
+                ->required(),
+            TinyEditor::make('description.ar')
+                ->label(__('Description (Arabic)'))
+                ->fileAttachmentsDisk('public')
+                ->fileAttachmentsVisibility('public')
+                ->fileAttachmentsDirectory('uploads')
+                ->profile('default|simple|full|minimal|none|custom')
+                ->direction('auto|rtl|ltr')
+                ->columnSpan('full')
+                ->required(),
 
-            // RichEditor::make('description.en')
-            //     ->label(__('Description') . ' (' . __('English') . ')')
-            //     ->required(),
-
-            // RichEditor::make('description.ar')
-            //     ->label(__('Description') . ' (' . __('Arabic') . ')')
-            //     ->required(),
 
 
             // Grid::make(2)

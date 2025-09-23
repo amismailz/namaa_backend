@@ -3,9 +3,8 @@
 namespace App\Filament\Resources;
 
 use AmidEsfahani\FilamentTinyEditor\TinyEditor;
-use App\Filament\Resources\BannerResource\Pages;
-use App\Filament\Resources\BannerResource\RelationManagers;
-use App\Models\Banner;
+use App\Filament\Resources\AboutUsResource\Pages;
+use App\Models\AboutUs;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
@@ -22,19 +21,19 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BannerResource extends Resource
+class AboutUsResource extends Resource
 {
-    protected static ?string $model = Banner::class;
+    protected static ?string $model = AboutUs::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     public static function getNavigationLabel(): string
     {
-        return __('Banners');
+        return __('About Us');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Banners');
+        return __('About Us');
     }
 
     /**
@@ -46,7 +45,7 @@ class BannerResource extends Resource
     /*******  d3bd3c2f-038f-4709-8489-077a7a02c467  *******/
     public static function getModelLabel(): string
     {
-        return __('Banner');
+        return __('About Us');
     }
     public static function form(Form $form): Form
     {
@@ -86,7 +85,7 @@ class BannerResource extends Resource
                                 FileUpload::make('image')
                                     ->label(__('Image'))
                                     ->image()
-                                    ->directory('banners')
+                                    ->directory('about')
                                     ->required()
                                     ->multiple()
                                     ->imagePreviewHeight('100'),
@@ -108,7 +107,7 @@ class BannerResource extends Resource
                     ->label(__('ID')),
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
-                ImageColumn::make('image')->label('Image')->circular()->width(50)->height(50),
+              //  ImageColumn::make('image')->label('Image')->circular()->width(50)->height(50),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
                     ->dateTime('d M, Y H:i:s')
@@ -139,9 +138,9 @@ class BannerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBanners::route('/'),
-            'create' => Pages\CreateBanner::route('/create'),
-            'edit' => Pages\EditBanner::route('/{record}/edit'),
+               'index' => Pages\ListAboutUss::route('/'),
+            'create' => Pages\CreateAboutUs::route('/create'),
+            'edit' => Pages\EditAboutUs::route('/{record}/edit'),
         ];
     }
 }
