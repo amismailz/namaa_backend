@@ -71,7 +71,7 @@ class BlogService
             return $this->exceptionFailed($exception);
         }
     }
-    public function getBlog($slug)
+public function getBlog($slug)
     {
         try {
 

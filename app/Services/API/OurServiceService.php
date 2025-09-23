@@ -94,10 +94,13 @@ class OurServiceService
     public function getSubServiceBySlug($slug)
     {
         try {
+
             return $this->okResponse(
                 __('Returned Sub Service successfully.'),
 
-                new ResourcesSubServiceResource(SubService::where('slug',  $slug)->first() ?? []),
+                new ResourcesSubServiceResource(SubService::where('slug->en', $slug)
+                    ->orWhere('slug->ar', $slug)
+                    ->first() ?? []),
 
             );
         } catch (\Exception $exception) {
