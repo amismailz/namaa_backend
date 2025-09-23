@@ -92,14 +92,14 @@ class OurServiceResource extends Resource
                     ->columnSpan('full')
                     ->required(),
 
-                // FileUpload::make('image')
-                //     ->label(__('Image'))
-                //     ->image()
-                //     ->directory('our-services')
-                //     ->disk('public')
-                //     ->visibility('public')
-                //     ->required()
-                //     ->imagePreviewHeight('100'),
+                FileUpload::make('image')
+                    ->label(__('Image'))
+                    ->image()
+                    ->directory('our-services')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->required()
+                    ->imagePreviewHeight('100'),
 
 
             ]);
