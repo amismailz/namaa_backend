@@ -149,7 +149,7 @@ class OurServiceResource extends Resource
         return [
             'index' => Pages\ListOurServices::route('/'),
             'create' => Pages\CreateOurService::route('/create'),
-            //   'edit' => Pages\EditOurService::route('/{record}/edit'),
+              'edit' => Pages\EditOurService::route('/{record}/edit'),
         ];
     }
 }
