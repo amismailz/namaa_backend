@@ -12,7 +12,7 @@ use Str;
 class SubService extends Model
 {
     use HasFactory, HasTranslations,  SoftDeletes;
-    public $translatable = ['title', 'description'];
+    public $translatable = ['title', 'description','slug'];
     protected $fillable = [
         'service_id',
         'title',

@@ -62,14 +62,14 @@ class OurServiceResource extends Resource
                 TextInput::make('slug.en')
                     ->required()
                     ->label(__('Slug (English)'))->unique(
-                        table: 'blogs',
+                        table: 'our_services',
                         column: 'slug->en',
                         ignoreRecord: true
                     ),
                 TextInput::make('slug.ar')
                     ->required()
                     ->label(__('Slug (Arabic)'))->unique(
-                        table: 'blogs',
+                        table: 'our_services',
                         column: 'slug->en',
                         ignoreRecord: true
                     ),
