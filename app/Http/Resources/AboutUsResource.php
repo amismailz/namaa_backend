@@ -18,6 +18,7 @@ class AboutUsResource extends JsonResource
         return [
 
             'id' => $this->id,
+            'slug' => $this->slug,
             'title' => $this->title,
             'description' => $this->description,
             'images' => $this->image ? array_map(function ($image) {
