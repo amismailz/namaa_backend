@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class BlogResource extends JsonResource
 {
+    
     /**
      * Transform the resource into an array.
      *
@@ -28,6 +29,7 @@ class BlogResource extends JsonResource
             // 'published_date' => $this->published_date,
             // 'faqs' => FaqResource::collection($this->faqs),
             //   'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+
         ];
     }
 }
