@@ -83,7 +83,7 @@ class AboutUsResource extends Resource
                             ->schema([
 
                                 FileUpload::make('image')
-                                    ->label(__('Image'))
+                                    ->label(__('Images'))
                                     ->image()
                                     ->directory('about')
                                     ->required()
