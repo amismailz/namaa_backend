@@ -26,6 +26,10 @@ class AboutUsResource extends Resource
     protected static ?string $model = AboutUs::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Home Page');
+    }
     public static function getNavigationLabel(): string
     {
         return __('About Us');
@@ -107,7 +111,7 @@ class AboutUsResource extends Resource
                     ->label(__('ID')),
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
-              //  ImageColumn::make('image')->label('Image')->circular()->width(50)->height(50),
+                //  ImageColumn::make('image')->label('Image')->circular()->width(50)->height(50),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
                     ->dateTime('d M, Y H:i:s')
@@ -138,7 +142,7 @@ class AboutUsResource extends Resource
     public static function getPages(): array
     {
         return [
-               'index' => Pages\ListAboutUss::route('/'),
+            'index' => Pages\ListAboutUss::route('/'),
             'create' => Pages\CreateAboutUs::route('/create'),
             'edit' => Pages\EditAboutUs::route('/{record}/edit'),
         ];
