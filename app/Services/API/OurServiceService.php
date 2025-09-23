@@ -82,7 +82,8 @@ class OurServiceService
             return $this->okResponse(
                 __('Returned Our Service successfully.'),
 
-                new OurServiceResource(OurService::where('slug',  $slug)->first() ?? []),
+                new OurServiceResource(OurService::where('slug->en', $slug)
+                    ->orWhere('slug->ar', $slug)->first() ?? []),
 
             );
         } catch (\Exception $exception) {
