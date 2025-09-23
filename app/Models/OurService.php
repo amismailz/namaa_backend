@@ -18,6 +18,7 @@ class OurService extends Model
         'title',
         'description',
         'image',
+        'icon',
         'service_id',
     ];
 public function subServices(): HasMany

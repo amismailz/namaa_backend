@@ -91,6 +91,14 @@ class OurServiceResource extends Resource
                     ->direction('auto|rtl|ltr')
                     ->columnSpan('full')
                     ->required(),
+                FileUpload::make('icon')
+                    ->label(__('Icon'))
+                    ->image()
+                    ->directory('our-services')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->required()
+                    ->imagePreviewHeight('100'),
 
                 FileUpload::make('image')
                     ->label(__('Image'))
