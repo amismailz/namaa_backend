@@ -20,6 +20,7 @@ class WebsiteAgencyResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
+            'image' => $this->image ? url('storage/' . $this->image) : null,
             'description' => $this->description,
             'created_at' => $this->created_at,
         ];
