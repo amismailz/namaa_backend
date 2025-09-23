@@ -73,24 +73,24 @@ class OurServiceResource extends Resource
                         column: 'slug->en',
                         ignoreRecord: true
                     ),
-                // TinyEditor::make('description.ar')
-                //     ->label(__('Description (Arabic)'))
-                //     ->fileAttachmentsDisk('public')
-                //     ->fileAttachmentsVisibility('public')
-                //     ->fileAttachmentsDirectory('uploads')
-                //     ->profile('default|simple|full|minimal|none|custom')
-                //     ->direction('auto|rtl|ltr')
-                //     ->columnSpan('full')
-                //     ->required(),
-                // TinyEditor::make('description.en')
-                //     ->label(__('Description (English)'))
-                //     ->fileAttachmentsDisk('public')
-                //     ->fileAttachmentsVisibility('public')
-                //     ->fileAttachmentsDirectory('uploads')
-                //     ->profile('default|simple|full|minimal|none|custom')
-                //     ->direction('auto|rtl|ltr')
-                //     ->columnSpan('full')
-                //     ->required(),
+                TinyEditor::make('description.ar')
+                    ->label(__('Description (Arabic)'))
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('uploads')
+                    ->profile('default|simple|full|minimal|none|custom')
+                    ->direction('auto|rtl|ltr')
+                    ->columnSpan('full')
+                    ->required(),
+                TinyEditor::make('description.en')
+                    ->label(__('Description (English)'))
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('uploads')
+                    ->profile('default|simple|full|minimal|none|custom')
+                    ->direction('auto|rtl|ltr')
+                    ->columnSpan('full')
+                    ->required(),
 
                 // FileUpload::make('image')
                 //     ->label(__('Image'))

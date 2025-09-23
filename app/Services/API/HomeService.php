@@ -15,6 +15,7 @@ use App\Http\Resources\CommentResource;
 use App\Http\Resources\FeatureResource;
 use App\Http\Resources\MovementResource;
 use App\Http\Resources\OptionsRangeResource;
+use App\Http\Resources\OurServiceResource;
 use App\Http\Resources\OurWorkResource;
 use App\Http\Resources\PointResource;
 use App\Http\Resources\RangeResource;
@@ -68,7 +69,7 @@ class HomeService
                     'protfolio' =>  OurWorkResource::collection(OurWork::latest()->limit(5)->get() ?? []),
                     'banners' => BannerResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
                     //'whyus' => WhyUsResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
-                    'services' =>   ServiceResource::collection(OurService::orderBy('created_at', 'desc')->limit(6)->get() ?? []),
+                    'services' =>   OurServiceResource::collection(OurService::orderBy('created_at', 'desc')->limit(6)->get() ?? []),
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
                     'blog' =>  BlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
                     'Website_design_agency_and_web_development' => new WebsiteAgencyResource(WebsiteAgency::first()),
