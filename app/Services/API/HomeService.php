@@ -11,6 +11,7 @@ use App\Http\Resources\AboutUsResource;
 use App\Http\Resources\BannerResource;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
+use App\Http\Resources\ClientResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\FeatureResource;
 use App\Http\Resources\MovementResource;
@@ -30,6 +31,7 @@ use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Client;
 use App\Models\Comment;
 use App\Models\ContactInfo;
 use App\Models\Feature;
@@ -73,7 +75,7 @@ class HomeService
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
                     'blog' =>  BlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
                     'Website_design_agency_and_web_development' => new WebsiteAgencyResource(WebsiteAgency::first()),
-                    'clients' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
+                    'clients' =>  ClientResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
                     'contact_info' => ContactInfo::first() ?? [],
 
                 ]

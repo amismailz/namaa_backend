@@ -127,8 +127,6 @@ class OurServiceService
             if (!$service) {
                 return $this->notFoundResponse('Service');
             }
-
-
             $sub_services = $service->subServices;
             return $this->okResponse(
                 __('Returned Sub Service successfully.'),
