@@ -8,13 +8,13 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditAboutUs extends EditRecord
 {
-      protected static string $resource = AboutUsResource::class;
+    protected static string $resource = AboutUsResource::class;
 
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            //   Actions\DeleteAction::make(),
         ];
     }
     protected function getRedirectUrl(): string
