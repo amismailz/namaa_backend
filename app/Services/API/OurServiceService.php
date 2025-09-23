@@ -117,16 +117,15 @@ class OurServiceService
             return $this->exceptionFailed($exception);
         }
     }
-        public function getSubServicesForService($slug)
+    public function getSubServicesForService($slug)
     {
         try {
 
             $sub_services = OurService::where('slug->en', $slug)
                 ->orWhere('slug->ar', $slug)
-                ->subServices()
-                ->get();
-   
-        
+                ->subServices();
+
+
             return $this->okResponse(
                 __('Returned Sub Service successfully.'),
                 new ResourcesSubServiceResource($sub_services)
@@ -138,7 +137,7 @@ class OurServiceService
             return $this->exceptionFailed($exception);
         }
     }
-    
+
 
 
     public function getSubServices()
