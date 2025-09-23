@@ -77,14 +77,17 @@ class OurServiceService
     public function getServiceBySlug($slug)
     {
         try {
+            $service = OurService::where('slug->en', $slug)
+                ->orWhere('slug->ar', $slug)->first();
+            if (!$service) {
+                return $this->notFoundResponse('Service');
+            }
 
 
             return $this->okResponse(
                 __('Returned Our Service successfully.'),
 
-                new OurServiceResource(OurService::where('slug->en', $slug)
-                    ->orWhere('slug->ar', $slug)->first() ?? []),
-
+                new OurServiceResource($service),
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -96,12 +99,16 @@ class OurServiceService
     {
         try {
 
+            $sub_service = SubService::where('slug->en', $slug)
+                ->orWhere('slug->ar', $slug)
+                ->first();
+            if (!$sub_service) {
+                return $this->notFoundResponse('Sub Service');
+            }
+
             return $this->okResponse(
                 __('Returned Sub Service successfully.'),
-
-                new ResourcesSubServiceResource(SubService::where('slug->en', $slug)
-                    ->orWhere('slug->ar', $slug)
-                    ->first() ?? []),
+                new ResourcesSubServiceResource($sub_service)
 
             );
         } catch (\Exception $exception) {
