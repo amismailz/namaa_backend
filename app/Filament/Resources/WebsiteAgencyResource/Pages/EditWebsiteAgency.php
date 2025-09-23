@@ -13,7 +13,11 @@ class EditWebsiteAgency extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-         //   Actions\DeleteAction::make(),
+            //   Actions\DeleteAction::make(),
         ];
+    }
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
     }
 }
