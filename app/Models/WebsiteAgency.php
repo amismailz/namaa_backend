@@ -16,7 +16,8 @@ class WebsiteAgency extends Model
         'title',
         'description',
     ];
-        protected static function booted(): void
+    protected $table = 'website_agency';
+    protected static function booted(): void
     {
         static::creating(function (WebsiteAgency $item) {
             $slug = Str::slug($item->title);
@@ -32,7 +33,7 @@ class WebsiteAgency extends Model
         });
 
         static::updating(function (WebsiteAgency $item) {
-       
+
             if ($item->isDirty('title')) { // Check if name is being updated
                 $slug = Str::slug($item->title);
                 $originalSlug = $slug;
