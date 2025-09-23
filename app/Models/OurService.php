@@ -21,7 +21,7 @@ class OurService extends Model
     ];
 public function subServices(): HasMany
 {
-    return $this->hasMany(SubService::class, 'service_id'); 
+    return $this->hasMany(SubService::class, 'our_service_id'); 
 }
     protected static function booted(): void
     {
