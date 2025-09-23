@@ -22,6 +22,7 @@ use App\Http\Resources\ReviewResource;
 use App\Http\Resources\ReviewStandardResource;
 use App\Http\Resources\ServiceResource;
 use App\Http\Resources\TripResource;
+use App\Http\Resources\WebsiteAgencyResource;
 use App\Http\Resources\WhyUsResource;
 use App\Models\AboutUs;
 use App\Models\Banner;
@@ -70,7 +71,7 @@ class HomeService
                     'services' =>   ServiceResource::collection(OurService::orderBy('created_at', 'desc')->limit(6)->get() ?? []),
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
                     'blog' =>  BlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
-                    'Website_design_agency_and_web_development' => WebsiteAgency::first(),
+                    'Website_design_agency_and_web_development' => new WebsiteAgencyResource(WebsiteAgency::first()),
                     'clients' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
                     'contact_info' => ContactInfo::first() ?? [],
 
