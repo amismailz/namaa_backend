@@ -121,11 +121,15 @@ class OurServiceService
     {
         try {
 
-            $sub_services = OurService::where('slug->en', $slug)
+            $service = OurService::where('slug->en', $slug)
                 ->orWhere('slug->ar', $slug)
-                ->subServices();
+                ->first();
+            if (!$service) {
+                return $this->notFoundResponse('Service');
+            }
 
 
+            $sub_services = $service->subServices;
             return $this->okResponse(
                 __('Returned Sub Service successfully.'),
                 new ResourcesSubServiceResource($sub_services)
