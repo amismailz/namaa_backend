@@ -17,11 +17,12 @@ class OurService extends Model
         'slug',
         'title',
         'description',
-        'image'
+        'image',
+        'service_id',
     ];
 public function subServices(): HasMany
 {
-    return $this->hasMany(SubService::class, 'our_service_id'); 
+    return $this->hasMany(SubService::class, 'service_id'); 
 }
     protected static function booted(): void
     {
