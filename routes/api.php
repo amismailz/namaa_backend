@@ -36,7 +36,7 @@ Route::group([
         Route::get('/form/client-request', [CountactUsController::class, 'getFormClientRequest']);
         Route::post('/submit/client-request', [CountactUsController::class, 'submitClientRequest']);
         Route::get('/faqs', [FaqController::class, 'getAllFaqs']);
-        
+
         Route::get('/home', [HomeController::class, 'home']);
         Route::get('/contact-info', [HomeController::class, 'contactInfo']);
         Route::get('/about-us', [HomeController::class, 'getAboutUs']);
@@ -44,6 +44,7 @@ Route::group([
         Route::get('/blogs/{slug}', [BlogController::class, 'getBlog']);
         Route::get('/our-services', [ServiceController::class, 'getAllServices']);
         Route::get('/service/{slug}/show', [ServiceController::class, 'getServiceBySlug']);
+        Route::get('/sub-service/{slug}/sub-service', [ServiceController::class, 'getSubServicesForService']);
         Route::get('/sub-service/{slug}/show', [ServiceController::class, 'getSubServiceBySlug']);
         Route::get('/our-services', [ServiceController::class, 'getAllServices']);
         Route::get('/our-works', [ServiceController::class, 'getAllWorks']);

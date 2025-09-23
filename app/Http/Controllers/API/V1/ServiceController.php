@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
-    
+
     use ResponseTrait;
 
     protected OurServiceService $our_service;
@@ -47,6 +47,11 @@ class ServiceController extends Controller
     {
         return $this->our_service->getSubServiceBySlug($slug);
     }
+    public function getSubServicesForService($slug)
+    {
+        return $this->our_service->getSubServicesForService($slug);
+    }
+
     public function getAllWorks(Request $request)
     {
         return $this->our_service->getAllWorks($request);
