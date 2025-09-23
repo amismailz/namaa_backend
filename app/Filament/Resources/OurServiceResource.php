@@ -127,8 +127,8 @@ class OurServiceResource extends Resource
                 //
             ])
             ->actions([
-                //  Tables\Actions\EditAction::make(),
-                //   Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -149,7 +149,7 @@ class OurServiceResource extends Resource
         return [
             'index' => Pages\ListOurServices::route('/'),
             'create' => Pages\CreateOurService::route('/create'),
-              'edit' => Pages\EditOurService::route('/{record}/edit'),
+            'edit' => Pages\EditOurService::route('/{record}/edit'),
         ];
     }
 }
