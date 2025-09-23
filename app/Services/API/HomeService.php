@@ -5,9 +5,9 @@ namespace App\Services\API;;
 use App\Enums\CongestionLevelEnum;
 use App\Enums\MovementTypeEnum;
 use App\Enums\RoleTypeEnum;
-
 use App\Filament\Resources\CategoryResource;
 use App\Http\Requests\API\MovementRequest;
+use App\Http\Resources\AboutUsResource;
 use App\Http\Resources\BannerResource;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
@@ -105,7 +105,7 @@ class HomeService
         try {
             return $this->okResponse(
                 __('Returned Range Details successfully.'),
-                AboutUs::collection(AboutUs::get())
+                AboutUsResource::collection(AboutUs::get())
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
