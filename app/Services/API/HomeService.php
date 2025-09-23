@@ -75,7 +75,7 @@ class HomeService
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
                     'blog' =>  BlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
                     'Website_design_agency_and_web_development' => new WebsiteAgencyResource(WebsiteAgency::first()),
-                    'clients' =>  ClientResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
+                    'clients' =>  ClientResource::collection(Client::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
                     'contact_info' => ContactInfo::first() ?? [],
 
                 ]
