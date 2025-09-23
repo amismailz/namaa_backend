@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class BlogResource extends JsonResource
 {
-    
+
     /**
      * Transform the resource into an array.
      *
@@ -20,11 +20,11 @@ class BlogResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
+            'image' => $this->image ? url(path: 'storage/' . $this->image) : null,
             // 'short_description' => $this->short_description,
             // 'description' => $this->description,
-            'meta_title' => $this->meta_title,
-            'meta_description' => $this->meta_description,
-            'image' => $this->image ? url(path: 'storage/' . $this->image) : null,
+            // 'meta_title' => $this->meta_title,
+            // 'meta_description' => $this->meta_description,
             // 'is_popular' => $this->is_popular,
             // 'published_date' => $this->published_date,
             // 'faqs' => FaqResource::collection($this->faqs),
