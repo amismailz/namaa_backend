@@ -42,10 +42,10 @@ Route::group([
         Route::get('/about-us', [HomeController::class, 'getAboutUs']);
         Route::get('/blogs', [BlogController::class, 'getAllBlogs']);
         Route::get('/blogs/{slug}', [BlogController::class, 'getBlog']);
-        Route::get('/our-services', [ServiceController::class, 'getAllServices']);
-        Route::get('/service/{slug}/show', [ServiceController::class, 'getServiceBySlug']);
+        Route::get('/services', [ServiceController::class, 'getAllServices']);
+        Route::get('/service/{slug}', [ServiceController::class, 'getServiceBySlug']);
         Route::get('/service/{slug}/sub-services', [ServiceController::class, 'getSubServicesForService']);
-        Route::get('/sub-service/{slug}/show', [ServiceController::class, 'getSubServiceBySlug']);
+        Route::get('/sub-service/{slug}', [ServiceController::class, 'getSubServiceBySlug']);
         Route::get('/services', [ServiceController::class, 'getAllServices']);
         Route::get('/our-works', [ServiceController::class, 'getAllWorks']);
         Route::get('/seo', [SeoController::class, 'getAllSeos']);
