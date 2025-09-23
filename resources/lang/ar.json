@@ -810,5 +810,7 @@
     "Transaction Type": "نوع المعاملة",
     "Transactions": "المعاملات",
     "Account Transactions": "معاملات الحسابات",
-    "Transaction": "المعاملة"
+    "Transaction": "المعاملة",
+    "Completed Projects":"مشاريع مُكتملة",
+    "years_of_experience":"سنوات الخبرة"
 }

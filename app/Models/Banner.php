@@ -18,10 +18,8 @@ class Banner extends Model
     protected $fillable = [
         'title',
         'description',
-        'image'
-    ];
-    protected $casts = [
-        'images' => 'array',
-
+        'image',
+        'years_of_experience',
+        'completed_projects'
     ];
 }

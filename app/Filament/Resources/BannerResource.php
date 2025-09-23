@@ -37,13 +37,6 @@ class BannerResource extends Resource
         return __('Banners');
     }
 
-    /**
-     * Get the model label
-     *
-     * @return string
-     */
-    /*************  ✨ Windsurf Command ⭐  *************/
-    /*******  d3bd3c2f-038f-4709-8489-077a7a02c467  *******/
     public static function getModelLabel(): string
     {
         return __('Banner');
@@ -58,6 +51,13 @@ class BannerResource extends Resource
                 Forms\Components\TextInput::make('title.ar')
                     ->label(__('Title') . ' (' . __('arabic') . ')')
                     ->required(),
+                Forms\Components\TextInput::make('years_of_experience')
+                    ->label(__('Years Of Experience'))
+                    ->required(),
+                Forms\Components\TextInput::make('completed_projects')
+                    ->label(__('Completed Projects'))
+                    ->required(),
+
 
                 TinyEditor::make('description.ar')
                     ->label(__('Description (Arabic)'))
@@ -88,7 +88,6 @@ class BannerResource extends Resource
                                     ->image()
                                     ->directory('banners')
                                     ->required()
-                                    ->multiple()
                                     ->imagePreviewHeight('100'),
                             ])
                             ->columns(1),
@@ -107,6 +106,8 @@ class BannerResource extends Resource
                     ->sortable()
                     ->label(__('ID')),
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
+                TextColumn::make('years_of_experience')->label(__('Years Of Experience'))->sortable()->searchable(),
+                TextColumn::make('completed_projects')->label(__('Completed Projects'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
                 ImageColumn::make('image')->label('Image')->circular()->width(50)->height(50),
                 TextColumn::make('created_at')
