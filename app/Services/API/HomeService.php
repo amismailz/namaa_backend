@@ -39,6 +39,7 @@ use App\Models\Range;
 use App\Models\Review;
 use App\Models\ReviewStandard;
 use App\Models\Trip;
+use App\Models\WebsiteAgency;
 use App\Models\WhyUs;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
@@ -69,6 +70,7 @@ class HomeService
                     'services' =>   ServiceResource::collection(OurService::orderBy('created_at', 'desc')->limit(6)->get() ?? []),
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
                     'blog' =>  BlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
+                    'Website_design_agency_and_web_development' => WebsiteAgency::first(),
                     'clients' =>  BlogResource::collection(Blog::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
                     'contact_info' => ContactInfo::first() ?? [],
 
