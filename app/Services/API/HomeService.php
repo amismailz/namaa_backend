@@ -70,7 +70,7 @@ class HomeService
                 __('Returned Home page successfully.'),
                 [
                     'protfolio' =>  OurWorkResource::collection(OurWork::latest()->limit(5)->get() ?? []),
-                    'banners' => BannerResource::collection(Banner::orderBy('created_at', 'desc')->first() ?? []),
+                    'banners' => new BannerResource(Banner::orderBy('created_at', 'desc')->first() ?? []),
                     //'whyus' => WhyUsResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
                     'services' =>   OurServiceResource::collection(OurService::orderBy('created_at', 'desc')->limit(6)->get() ?? []),
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
