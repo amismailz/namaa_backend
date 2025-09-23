@@ -14,6 +14,7 @@ use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
 use App\Http\Resources\ClientResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\FeatureResource;
+use App\Http\Resources\HomePage\BlogResource as HomePageBlogResource;
 use App\Http\Resources\MovementResource;
 use App\Http\Resources\OptionsRangeResource;
 use App\Http\Resources\OurServiceResource;
@@ -73,7 +74,7 @@ class HomeService
                     //'whyus' => WhyUsResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
                     'services' =>   OurServiceResource::collection(OurService::orderBy('created_at', 'desc')->limit(6)->get() ?? []),
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
-                    'blog' =>  BlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
+                    'blog' =>  HomePageBlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
                     'Website_design_agency_and_web_development' => new WebsiteAgencyResource(WebsiteAgency::first()),
                     'clients' =>  ClientResource::collection(Client::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
                     'contact_info' => ContactInfo::first() ?? [],
