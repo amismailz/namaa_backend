@@ -19,10 +19,10 @@ class OurService extends Model
         'description',
         'image'
     ];
-    public function subServices(): HasMany
-    {
-        return $this->hasMany(SubService::class);
-    }
+public function subServices(): HasMany
+{
+    return $this->hasMany(SubService::class, 'service_id'); 
+}
     protected static function booted(): void
     {
         static::creating(function (OurService $item) {
