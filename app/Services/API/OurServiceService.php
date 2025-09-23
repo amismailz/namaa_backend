@@ -126,8 +126,7 @@ class OurServiceService
                 ->subServices()
                 ->get();
    
-            
-
+        
             return $this->okResponse(
                 __('Returned Sub Service successfully.'),
                 new ResourcesSubServiceResource($sub_services)
