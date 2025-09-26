@@ -14,6 +14,7 @@ use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\MovementResource;
 use App\Http\Resources\OptionsRangeResource;
+use App\Http\Resources\OurServiceResource;
 use App\Http\Resources\PointResource;
 use App\Http\Resources\RangeResource;
 use App\Http\Resources\ReviewResource;
@@ -71,7 +72,7 @@ class BlogService
             return $this->exceptionFailed($exception);
         }
     }
-public function getBlog($slug)
+    public function getBlog($slug)
     {
         try {
 
@@ -88,6 +89,37 @@ public function getBlog($slug)
 
 
             );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+    public function getBlogOrServiceBySlug($slug)
+    {
+        try {
+
+            $blog = Blog::where('slug->en', $slug)
+                ->orWhere('slug->ar', $slug)
+                ->first();
+            if (!$blog) {
+                return $this->okResponse(
+                    __('Returned Home page successfully.'),
+                    [
+                        'blog' => new BlogResource($blog),
+                        'popular_blogs' => BlogResource::collection(Blog::where('is_popular', 1)->limit(6)->get()),
+                    ]
+                );
+            }
+            $service = OurService::where('slug->en', $slug)
+                ->orWhere('slug->ar', $slug)->first();
+            if (!$service) {
+
+                return $this->okResponse(
+                    __('Returned Our Service successfully.'),
+                    new OurServiceResource($service),
+                );
+            }
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             dd($exception);
