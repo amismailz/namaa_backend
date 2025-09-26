@@ -102,7 +102,7 @@ class BlogService
             $blog = Blog::where('slug->en', $slug)
                 ->orWhere('slug->ar', $slug)
                 ->first();
-            if (!$blog) {
+            if ($blog) {
                 return $this->okResponse(
                     __('Returned Home page successfully.'),
                     [
@@ -113,8 +113,7 @@ class BlogService
             }
             $service = OurService::where('slug->en', $slug)
                 ->orWhere('slug->ar', $slug)->first();
-            if (!$service) {
-
+            if ($service) {
                 return $this->okResponse(
                     __('Returned Our Service successfully.'),
                     new OurServiceResource($service),
