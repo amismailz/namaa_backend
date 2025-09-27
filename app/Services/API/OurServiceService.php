@@ -65,7 +65,9 @@ class OurServiceService
 
             return $this->okResponse(
                 __('Returned Our Services successfully.'),
+
                 OurServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
+
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -76,7 +78,6 @@ class OurServiceService
     public function getAllServicesForNavBar()
     {
         try {
-
             return $this->okResponse(
                 __('Returned Our Services successfully.'),
                 NavBarOurServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
@@ -87,7 +88,6 @@ class OurServiceService
             return $this->exceptionFailed($exception);
         }
     }
-
     public function getServiceBySlug($slug)
     {
         try {
@@ -178,14 +178,17 @@ class OurServiceService
             $currentPage = request()->input('page', 1);
             $ourWorks = OurWork::query();
 
+
             if (!empty($request->service_slug)) {
                 $ourWorks->whereHas('service', function ($q) use ($request) {
-                    $q->where('slug', $request->service_slug);
+                    $q->where('slug->en', $request->service_slug)->orWhere('slug->ar', $request->service_slug);
                 });
             }
 
             $ourWorks = $ourWorks->paginate($perPage, ['*'], 'page', $currentPage);
-            $options =  OurService::pluck('title', 'slug')->toArray();
+            $options = OurService::all()->mapWithKeys(function ($service) {
+                return [$service->slug => $service->getTranslation('title', 'en')];
+            })->toArray();
             return $this->paginateResponseWithFilters(OurWorkResource::collection($ourWorks), $options);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
