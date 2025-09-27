@@ -76,7 +76,7 @@ class OurServiceService
     public function getAllServicesForNavBar()
     {
         try {
-
+          
             return $this->okResponse(
                 __('Returned Our Services successfully.'),
                 NavBarOurServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),

@@ -20,9 +20,9 @@ class ServiceResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
-            //   'description' => $this->description,
-            //  'image' => $this->image ? url('storage/' . $this->image) : null,
-            //   'created_at' => $this->created_at,
+            'description' => $this->description,
+            'image' => $this->image ? url('storage/' . $this->image) : null,
+            'created_at' => $this->created_at,
         ];
     }
 }
