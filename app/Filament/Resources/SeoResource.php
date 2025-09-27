@@ -50,19 +50,19 @@ class SeoResource extends Resource
                 Grid::make(2)
                     ->schema([
                         Forms\Components\TextInput::make('title.en')
-                            ->label(__('Title') . ' (' . __('english') . ')')
+                            ->label(__('Meta Title') . ' (' . __('english') . ')')
                             ->required(),
                         Forms\Components\TextInput::make('title.ar')
-                            ->label(__('Title') . ' (' . __('arabic') . ')')
+                            ->label(__('Meta Title') . ' (' . __('arabic') . ')')
                             ->required(),
                     ]),
                 Grid::make(2)
                     ->schema([
                         Forms\Components\Textarea::make('description.ar')
-                            ->label(__('Description (Arabic)'))
+                            ->label(__('Meta Description (Arabic)'))
                             ->required(),
                         Forms\Components\Textarea::make('description.en')
-                            ->label(__('Description (English)'))
+                            ->label(__('Meta Description (English)'))
                             ->required(),
                     ]),
             ]);
