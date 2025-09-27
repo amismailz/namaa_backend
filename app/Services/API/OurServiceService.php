@@ -76,7 +76,7 @@ class OurServiceService
     public function getAllServicesForNavBar()
     {
         try {
-          
+
             return $this->okResponse(
                 __('Returned Our Services successfully.'),
                 NavBarOurServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
@@ -87,7 +87,7 @@ class OurServiceService
             return $this->exceptionFailed($exception);
         }
     }
-    
+
     public function getServiceBySlug($slug)
     {
         try {
@@ -177,9 +177,13 @@ class OurServiceService
             $perPage = request()->input('per_page', 15);
             $currentPage = request()->input('page', 1);
             $ourWorks = OurWork::query();
-            $service = OurService::where('slug', $request->service_slug)->first();
-            if ($request->service_slug) {
-                $ourWorks->where('service_id', $service->id);
+
+            if (!empty($request->service_slug)) {
+                $service = OurService::where('slug', $request->service_slug)->first();
+
+                if ($service) {
+                    $ourWorks->where('service_id', $service->id);
+                }
             }
 
             $ourWorks = $ourWorks->paginate($perPage, ['*'], 'page', $currentPage);

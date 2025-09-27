@@ -20,11 +20,7 @@ class OurWorkResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
-            'service' => [
-                'id' => $this->service->id,
-                'slug' => $this->service->slug,
-                'title' => $this->service->title
-            ],
+            'service' =>new ServiceResource($this->service),
             'description' => $this->description,
             'image' => $this->image ? url('storage/' . $this->image) : null,
             'created_at' => $this->created_at,
