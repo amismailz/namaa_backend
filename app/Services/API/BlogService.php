@@ -107,6 +107,7 @@ class BlogService
                     __('Returned Home page successfully.'),
                     [
                         'blog' => new BlogResource($blog),
+                        'type' => 'blog',
                         'popular_blogs' => BlogResource::collection(Blog::where('is_popular', 1)->limit(6)->get()),
                     ]
                 );
@@ -116,9 +117,13 @@ class BlogService
             if ($service) {
                 return $this->okResponse(
                     __('Returned Our Service successfully.'),
-                    new OurServiceResource($service),
+                    [
+                        'service' => new OurServiceResource($service),
+                        'type' => 'service'
+                    ]
                 );
             }
+            return $this->notFoundResponse('No Blog or Service found for this slug.');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             dd($exception);
