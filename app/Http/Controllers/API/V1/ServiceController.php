@@ -35,6 +35,10 @@ class ServiceController extends Controller
     {
         return $this->our_service->getAllServices();
     }
+    public function getAllServicesForNavBar()
+    {
+        return $this->our_service->getAllServicesForNavBar();
+    }
     public function getServiceBySlug($slug)
     {
         return $this->our_service->getServiceBySlug($slug);

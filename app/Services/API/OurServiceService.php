@@ -15,6 +15,7 @@ use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\JobResource;
 use App\Http\Resources\MovementResource;
+use App\Http\Resources\NavBar\OurServiceResource as NavBarOurServiceResource;
 use App\Http\Resources\OptionsRangeResource;
 use App\Http\Resources\OurServiceResource;
 use App\Http\Resources\OurWorkResource;
@@ -64,9 +65,7 @@ class OurServiceService
 
             return $this->okResponse(
                 __('Returned Our Services successfully.'),
-
                 OurServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
-
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -74,6 +73,21 @@ class OurServiceService
             return $this->exceptionFailed($exception);
         }
     }
+    public function getAllServicesForNavBar()
+    {
+        try {
+
+            return $this->okResponse(
+                __('Returned Our Services successfully.'),
+                NavBarOurServiceResource::collection(OurService::orderBy('created_at', 'desc')->get() ?? []),
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+    
     public function getServiceBySlug($slug)
     {
         try {

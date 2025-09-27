@@ -42,6 +42,7 @@ Route::group([
         Route::get('/about-us', [HomeController::class, 'getAboutUs']);
         Route::get('/blogs', [BlogController::class, 'getAllBlogs']);
         Route::get('/blogs/{slug}', [BlogController::class, 'getBlog']);
+        Route::get('navbar/services', [ServiceController::class, 'getAllServices']);
         Route::get('/services', [ServiceController::class, 'getAllServices']);
         Route::get('/service/{slug}', [ServiceController::class, 'getServiceBySlug']);
         Route::get('/service/{slug}/sub-services', [ServiceController::class, 'getSubServicesForService']);

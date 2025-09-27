@@ -71,13 +71,14 @@ class HomeService
                 [
                     'protfolio' =>  OurWorkResource::collection(OurWork::latest()->limit(5)->get() ?? []),
                     'banners' => new BannerResource(Banner::orderBy('created_at', 'desc')->first() ?? []),
+                    'aboutUs' => new AboutUsResource(AboutUs::first() ?? []),
                     //'whyus' => WhyUsResource::collection(Banner::orderBy('created_at', 'desc')->get() ?? []),
                     'services' =>   OurServiceResource::collection(OurService::orderBy('created_at', 'desc')->limit(6)->get() ?? []),
                     // 'Features' =>   FeatureResource::collection(Feature::orderBy('created_at', 'desc')->get() ?? []),
                     'blog' =>  HomePageBlogResource::collection(Blog::orderBy('published_date', 'desc')->limit(3)->get() ?? []),
                     'Website_design_agency_and_web_development' => new WebsiteAgencyResource(WebsiteAgency::first()),
                     'clients' =>  ClientResource::collection(Client::orderBy('created_at', 'desc')->limit(5)->get() ?? []),
-                   // 'contact_info' => ContactInfo::first() ?? [],
+                    // 'contact_info' => ContactInfo::first() ?? [],
 
                 ]
             );
