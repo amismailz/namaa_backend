@@ -179,9 +179,9 @@ class OurServiceService
             $ourWorks = OurWork::query();
 
             if (!empty($request->service_slug)) {
-
-                $ourWorks->join('our_services', 'our_services.id', '=', 'our_works.service_id')
-                    ->where('our_services.slug', $request->service_slug);
+                $ourWorks->whereHas('service', function ($q) use ($request) {
+                    $q->where('slug', $request->service_slug);
+                });
             }
 
             $ourWorks = $ourWorks->paginate($perPage, ['*'], 'page', $currentPage);
