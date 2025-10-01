@@ -66,21 +66,13 @@ class SeoResource extends Resource
                             ->label(__('Meta Description (English)'))
                             ->required(),
                     ]),
+
                 Grid::make(2)
                     ->schema([
                         Forms\Components\Textarea::make('og_description.ar')
-                            ->label(__('Meta Description (Arabic)'))
-                            ->required(),
-                        Forms\Components\Textarea::make('og_description.en')
-                            ->label(__('Meta Description (English)'))
-                            ->required(),
-                    ]),
-                Grid::make(2)
-                    ->schema([
-                        Forms\Components\Textarea::make('description.ar')
                             ->label(__('Open Graph Description (Arabic)'))
                             ->required(),
-                        Forms\Components\Textarea::make('description.en')
+                        Forms\Components\Textarea::make('og_description.en')
                             ->label(__('Open Graph Description (English)'))
                             ->required(),
                     ]),
