@@ -86,8 +86,8 @@ class BlogService
             $blogs->getCollection()->transform(function ($blog) {
                 return [
                     'id'    => $blog->id,
-                    'title' => $blog->title,
-                    'slug'  => $blog->slug,
+                    'title' => ['en' => $blog->title->en, 'ar' => $blog->title->ar],
+                    'slug'  => ['en' => $blog->slug->en, 'ar' => $blog->slug->ar],
                     'date'  => $blog->created_at,
                 ];
             });
