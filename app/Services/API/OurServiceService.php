@@ -109,7 +109,7 @@ class OurServiceService
             return $this->exceptionFailed($exception);
         }
     }
-    public function getServicesSiteMap($request)
+    public function getServicesSiteMap()
     {
         try {
             $perPage = request()->input('per_page', 15);
