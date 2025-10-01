@@ -75,22 +75,16 @@ class BlogService
     public function getBlogsSiteMap($request)
     {
         try {
-            $perPage = request()->input('per_page', 15);
-            $currentPage = request()->input('page', 1);
-
             $blogs = Blog::query()
-                ->when($request->search, function ($query) use ($request) {
-                    $query->where('title->en', 'like', '%' . $request->search . '%')
-                        ->orWhere('title->ar', 'like', '%' . $request->search . '%');
-                })
-                ->orderBy('blogs.created_at', 'desc')
-                ->paginate($perPage, [
-                    'id',
-                    'title',
-                    'slug',
-                    'created_at'
-                ], 'page', $currentPage);
-            return $this->paginateResponse($blogs);
+                // ->when($request->search, function ($query) use ($request) {
+                //     $query->where('title->en', 'like', '%' . $request->search . '%')
+                //         ->orWhere('title->ar', 'like', '%' . $request->search . '%');
+                // })
+                ->orderBy('blogs.created_at', 'desc');
+            return $this->okResponse(
+                __('Returned Blogs successfully.'),
+                $blogs
+            );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             dd($exception);

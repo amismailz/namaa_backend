@@ -112,17 +112,12 @@ class OurServiceService
     public function getServicesSiteMap()
     {
         try {
-            $perPage = request()->input('per_page', 15);
-            $currentPage = request()->input('page', 1);
             $Services = OurService::query()
-                ->orderBy('our_services.created_at', 'desc')
-                ->paginate($perPage, [
-                    'id',
-                    'title',
-                    'slug',
-                    'created_at'
-                ], 'page', $currentPage);
-            return $this->paginateResponse($Services);
+                ->orderBy('our_services.created_at', 'desc');
+            return $this->okResponse(
+                __('Returned Our Services successfully.'),
+                $Services
+            );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             dd($exception);
