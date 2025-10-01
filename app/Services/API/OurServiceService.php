@@ -112,8 +112,7 @@ class OurServiceService
     public function getServicesSiteMap()
     {
         try {
-            $Services = OurService::query()
-                ->orderBy('our_services.created_at', 'desc');
+            $Services = OurService::latest()->get();
             return $this->okResponse(
                 __('Returned Our Services successfully.'),
                 $Services

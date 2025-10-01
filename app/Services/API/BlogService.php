@@ -80,7 +80,7 @@ class BlogService
                 //     $query->where('title->en', 'like', '%' . $request->search . '%')
                 //         ->orWhere('title->ar', 'like', '%' . $request->search . '%');
                 // })
-                ->orderBy('blogs.created_at', 'desc');
+                ->latest()->get();
             return $this->okResponse(
                 __('Returned Blogs successfully.'),
                 $blogs
