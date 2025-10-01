@@ -12,7 +12,7 @@ use Str;
 class Seo extends Model
 {
     use HasFactory, HasTranslations,  SoftDeletes;
-    public $translatable = ['title', 'description'];
+    public $translatable = ['title', 'description','twitter_description', 'og_description'];
     protected $fillable = [
         'page_name',
         'title',
