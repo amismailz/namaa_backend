@@ -83,14 +83,18 @@ class BlogService
             }
 
             $blogs = $blogs->orderBy('blogs.created_at', 'desc')->paginate($perPage, ['*'], 'page', $currentPage);
-            $blogs->getCollection()->transform(function ($blog) {
-                return [
-                    'id'    => $blog->id,
-                    'title' => ['en' => $blog->title['en'], 'ar' => $blog->title['ar']],
-                    'slug'  => ['en' => $blog->slug['en'], 'ar' => $blog->slug['ar']],
-                    'date'  => $blog->created_at,
-                ];
-            });
+            $blogs = Blog::query()
+                ->when($request->search, function ($query) use ($request) {
+                    $query->where('title->en', 'like', '%' . $request->search . '%')
+                        ->orWhere('title->ar', 'like', '%' . $request->search . '%');
+                })
+                ->orderBy('blogs.created_at', 'desc')
+                ->paginate($perPage, [
+                    'id',
+                    'title',
+                    'slug',
+                    'created_at'
+                ], 'page', $currentPage);
             return $this->paginateResponse($blogs);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
