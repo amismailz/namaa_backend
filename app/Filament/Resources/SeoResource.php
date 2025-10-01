@@ -70,20 +70,18 @@ class SeoResource extends Resource
                 Grid::make(2)
                     ->schema([
                         Forms\Components\Textarea::make('og_description.ar')
-                            ->label(__('Open Graph Description (Arabic)'))
-                            ->required(),
+                            ->label(__('Open Graph Description (Arabic)')),
+
                         Forms\Components\Textarea::make('og_description.en')
-                            ->label(__('Open Graph Description (English)'))
-                            ->required(),
+                            ->label(__('Open Graph Description (English)')),
+
                     ]),
                 Grid::make(2)
                     ->schema([
                         Forms\Components\Textarea::make('twitter_description.ar')
-                            ->label(__('Twitter Description (Arabic)'))
-                            ->required(),
+                            ->label(__('Twitter Description (Arabic)')),
                         Forms\Components\Textarea::make('twitter_description.en')
-                            ->label(__('Twitter Description (English)'))
-                            ->required(),
+                            ->label(__('Twitter Description (English)')),
                     ]),
                 Grid::make(2)
                     ->schema([
@@ -94,7 +92,7 @@ class SeoResource extends Resource
                             ->directory('seos')
                             ->disk('public')
                             ->visibility('public')
-                            ->required()
+
                             ->imagePreviewHeight('100'),
 
                         FileUpload::make('twitter_image')
@@ -103,7 +101,7 @@ class SeoResource extends Resource
                             ->directory('seos')
                             ->disk('public')
                             ->visibility('public')
-                            ->required()
+
                             ->imagePreviewHeight('100'),
                     ]),
 
