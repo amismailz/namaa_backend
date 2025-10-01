@@ -112,7 +112,7 @@ class OurServiceService
     public function getServicesSiteMap()
     {
         try {
-            $Services = OurService::latest()->get();
+            $Services = OurService::latest()->select('id', 'title', 'slug', 'created_at')->get();
             return $this->okResponse(
                 __('Returned Our Services successfully.'),
                 $Services

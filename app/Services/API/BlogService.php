@@ -75,12 +75,15 @@ class BlogService
     public function getBlogsSiteMap($request)
     {
         try {
-            $blogs = Blog::query()
+            $blogs = Blog::
                 // ->when($request->search, function ($query) use ($request) {
                 //     $query->where('title->en', 'like', '%' . $request->search . '%')
                 //         ->orWhere('title->ar', 'like', '%' . $request->search . '%');
                 // })
+                select('id', 'title', 'slug', 'created_at')
                 ->latest()->get();
+
+
             return $this->okResponse(
                 __('Returned Blogs successfully.'),
                 $blogs
