@@ -9,6 +9,7 @@ use App\Filament\Resources\SeoResource\RelationManagers;
 use App\Models\Seo;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -24,7 +25,7 @@ class SeoResource extends Resource
     protected static ?string $model = Seo::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-        public static function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         return __('Seo');
     }
@@ -65,6 +66,56 @@ class SeoResource extends Resource
                             ->label(__('Meta Description (English)'))
                             ->required(),
                     ]),
+                Grid::make(2)
+                    ->schema([
+                        Forms\Components\Textarea::make('og_description.ar')
+                            ->label(__('Meta Description (Arabic)'))
+                            ->required(),
+                        Forms\Components\Textarea::make('og_description.en')
+                            ->label(__('Meta Description (English)'))
+                            ->required(),
+                    ]),
+                Grid::make(2)
+                    ->schema([
+                        Forms\Components\Textarea::make('description.ar')
+                            ->label(__('Open Graph Description (Arabic)'))
+                            ->required(),
+                        Forms\Components\Textarea::make('description.en')
+                            ->label(__('Open Graph Description (English)'))
+                            ->required(),
+                    ]),
+                Grid::make(2)
+                    ->schema([
+                        Forms\Components\Textarea::make('twitter_description.ar')
+                            ->label(__('Twitter Description (Arabic)'))
+                            ->required(),
+                        Forms\Components\Textarea::make('twitter_description.en')
+                            ->label(__('Twitter Description (English)'))
+                            ->required(),
+                    ]),
+                Grid::make(2)
+                    ->schema([
+
+                        FileUpload::make('og_image')
+                            ->label(__('Open Graph Image'))
+                            ->image()
+                            ->directory('seos')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->required()
+                            ->imagePreviewHeight('100'),
+
+                        FileUpload::make('twitter_image')
+                            ->label(__('Twitter Image'))
+                            ->image()
+                            ->directory('seos')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->required()
+                            ->imagePreviewHeight('100'),
+                    ]),
+
+
             ]);
     }
 
@@ -75,7 +126,7 @@ class SeoResource extends Resource
                 TextColumn::make('id')
                     ->sortable()
                     ->label(__('ID')),
-                TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
+                TextColumn::make('title')->label(__('Meta Title'))->sortable()->searchable(),
                 TextColumn::make(name: 'page_name')->label(__('Page Name'))->sortable()->searchable(),
 
                 TextColumn::make('created_at')
