@@ -115,7 +115,7 @@ class OurServiceService
             $perPage = request()->input('per_page', 15);
             $currentPage = request()->input('page', 1);
             $Services = OurService::query()
-                ->orderBy('services.created_at', 'desc')
+                ->orderBy('our_services.created_at', 'desc')
                 ->paginate($perPage, [
                     'id',
                     'title',
