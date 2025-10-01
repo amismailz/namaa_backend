@@ -77,12 +77,7 @@ class BlogService
         try {
             $perPage = request()->input('per_page', 15);
             $currentPage = request()->input('page', 1);
-            $blogs = Blog::query();
-            if ($request->search) {
-                $blogs->where('title', 'like', '%' . $request->search . '%');
-            }
 
-            $blogs = $blogs->orderBy('blogs.created_at', 'desc')->paginate($perPage, ['*'], 'page', $currentPage);
             $blogs = Blog::query()
                 ->when($request->search, function ($query) use ($request) {
                     $query->where('title->en', 'like', '%' . $request->search . '%')

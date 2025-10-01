@@ -109,6 +109,26 @@ class OurServiceService
             return $this->exceptionFailed($exception);
         }
     }
+    public function getServicesSiteMap($request)
+    {
+        try {
+            $perPage = request()->input('per_page', 15);
+            $currentPage = request()->input('page', 1);
+            $Services = OurService::query()
+                ->orderBy('services.created_at', 'desc')
+                ->paginate($perPage, [
+                    'id',
+                    'title',
+                    'slug',
+                    'created_at'
+                ], 'page', $currentPage);
+            return $this->paginateResponse($Services);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
     public function getSubServiceBySlug($slug)
     {
         try {
