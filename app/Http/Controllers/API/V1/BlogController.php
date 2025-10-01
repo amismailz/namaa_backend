@@ -32,16 +32,17 @@ class BlogController extends Controller
     {
         return $this->blogService->getAllBlogs($request);
     }
-       public function getBlog($slug)
+    public function getBlog($slug)
     {
         return $this->blogService->getBlog($slug);
     }
-       public function getBlogOrServiceBySlug($slug)
+    public function getBlogsSiteMap($slug)
+    {
+        return $this->blogService->getBlogsSiteMap($slug);
+    }
+
+    public function getBlogOrServiceBySlug($slug)
     {
         return $this->blogService->getBlogOrServiceBySlug($slug);
     }
-
-  
-
-  
 }
