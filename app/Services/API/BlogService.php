@@ -83,7 +83,14 @@ class BlogService
             }
 
             $blogs = $blogs->orderBy('blogs.created_at', 'desc')->paginate($perPage, ['*'], 'page', $currentPage);
-           
+            $blogs->getCollection()->transform(function ($blog) {
+                return [
+                    'id'    => $blog->id,
+                    'title' => $blog->title,
+                    'slug'  => $blog->slug,
+                    'date'  => $blog->created_at,
+                ];
+            });
             return $this->paginateResponse($blogs);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -91,7 +98,7 @@ class BlogService
             return $this->exceptionFailed($exception);
         }
     }
-    
+
     public function getBlog($slug)
     {
         try {
