@@ -20,6 +20,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Textarea;
 
 class OurServiceResource extends Resource
 {
@@ -91,6 +92,18 @@ class OurServiceResource extends Resource
                     ->direction('auto|rtl|ltr')
                     ->columnSpan('full')
                     ->required(),
+                Textarea::make('meta_title.ar')
+                    ->label(__('Meta title (Arabic)'))
+                    ->maxLength(255),
+
+                Textarea::make('meta_title.en')
+                    ->label(__('Meta title (English)'))
+                    ->maxLength(255),
+                Textarea::make('meta_description.ar')
+                    ->label(__('Meta description (Arabic)')),
+
+                Textarea::make('meta_description.en')
+                    ->label(__('Meta description (English)')),
                 FileUpload::make('icon')
                     ->label(__('Icon'))
                     ->image()
