@@ -46,7 +46,7 @@ class SeoResource extends Resource
                         collect(PagesEnum::cases())
                             ->mapWithKeys(fn($case) => [$case->value => $case->label()])
                             ->toArray()
-                    )
+                    )->disabled()
                     ->required(),
                 Grid::make(2)
                     ->schema([
