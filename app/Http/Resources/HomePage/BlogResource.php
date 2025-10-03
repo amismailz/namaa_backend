@@ -21,7 +21,7 @@ class BlogResource extends JsonResource
             'slug' => $this->slug,
             'title' => $this->title,
             'image' => $this->image ? url(path: 'storage/' . $this->image) : null,
-            // 'short_description' => $this->short_description,
+            'short_description' => $this->short_description,
             // 'description' => $this->description,
             // 'meta_title' => $this->meta_title,
             // 'meta_description' => $this->meta_description,
