@@ -87,15 +87,13 @@ class BlogResource extends Resource
                             ->required(),
                     ])
                     ->columns(2),
-                // TextInput::make('short_description.ar')
-                //     ->label(__('Short description (Arabic)'))
-                //     ->required()
-                //     ->maxLength(255),
+                TextArea::make('short_description.ar')
+                    ->label(__('Short description (Arabic)'))
+                    ->required(),
 
-                // TextInput::make('short_description.en')
-                //     ->label(__('Short description (English)'))
-                //     ->required()
-                //     ->maxLength(255),
+                TextArea::make('short_description.en')
+                    ->label(__('Short description (English)'))
+                    ->required(),
 
                 TinyEditor::make('description.ar')
                     ->label(__('Description (Arabic)'))
