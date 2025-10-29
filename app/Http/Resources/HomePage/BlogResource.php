@@ -18,7 +18,10 @@ class BlogResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'slug' => $this->slug,
+            'slug' => [
+                'en' => $this->getTranslation('slug', 'en'),
+                'ar' => $this->getTranslation('slug', 'ar'),
+            ],
             'title' => $this->title,
             'image' => $this->image ? url(path: 'storage/' . $this->image) : null,
             'short_description' => $this->short_description,
