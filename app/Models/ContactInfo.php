@@ -24,7 +24,7 @@ class ContactInfo extends Model
         'facebook_link',
         'instagram_link',
         'twitter_link',
-        'linkedin_link',
+        'linkedIn_link',
         'youtube_link',
         'tiktok_link',
         'postal_code',
