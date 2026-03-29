@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('message')->nullable();
             $table->foreignId('hosting_plan_id')
                 ->constrained('hosting_plans')
-                ->cascadeOnDelete();
+                ->onDelete('set null');
             $table->softDeletes();
             $table->timestamps();
         });

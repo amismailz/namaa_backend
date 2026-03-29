@@ -27,7 +27,7 @@ return new class extends Migration
                 ->default(false)
                 ->nullable();
             $table->unsignedBigInteger('service_id')->nullable();
-            $table->foreign('service_id')->references('id')->on('our_services')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->on('our_services')->onDelete('set null');
             $table->softDeletes();
             $table->timestamps();
         });
